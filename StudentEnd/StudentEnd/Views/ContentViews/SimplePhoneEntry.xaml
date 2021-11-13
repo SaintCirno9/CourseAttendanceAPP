@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StudentEnd.Views.ContentViews.SimplePhoneEntry"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:behaviors="clr-namespace:AppShared.Behaviors;assembly=AppShared"
+             xmlns:converters="clr-namespace:AppShared.Converters;assembly=AppShared"
+             xmlns:controls="clr-namespace:AppShared.Controls;assembly=AppShared">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converters:NameValidationConverter x:Key="FirstValidationErrorConverter" />
+            <converters:BooleanToColorConverter x:Key="ColorConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout>
+            <border:SfBorder
+                BackgroundColor="{DynamicResource Gray-Bg}"
+                BorderColor="{Binding Path=IsFocused, Source={x:Reference PhoneEntry}, Converter={x:StaticResource ColorConverter}, ConverterParameter=3}"
+                Style="{StaticResource LoginFormBorderlessEntryBorderStyle}">
+
+                <Grid ColumnDefinitions="*, Auto">
+
+                    <controls:BorderlessEntry
+                        x:Name="PhoneEntry"
+                        Margin="15,0"
+                        HeightRequest="40"
+                        Keyboard="Numeric"
+                        Placeholder="电话号码"
+                        Style="{StaticResource BorderlessEntryStyle}"
+                        Text="{Binding Phone.Value}">
+                        <Entry.Behaviors>
+                            <behaviors:EntryLineValidationBehaviour IsValid="{Binding Phone.IsValid}" />
+                        </Entry.Behaviors>
+                    </controls:BorderlessEntry>
+
+                    <!--  Label to display error icon  -->
+                    <Label
+                        Grid.Column="1"
+                        IsVisible="{Binding Path=IsVisible, Source={x:Reference ValidationLabel}}"
+                        Style="{StaticResource ErrorIconLabelStyle}"
+                        Text="{StaticResource Error}" />
+
+                </Grid>
+            </border:SfBorder>
+
+            <Label
+                x:Name="ValidationLabel"
+                Margin="15,-3,0,0"
+                FontSize="12"
+                IsVisible="{Binding Phone.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                Style="{StaticResource SimpleLabelStyle}"
+                Text="{Binding Phone.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                TextColor="{DynamicResource Red}"
+                VerticalOptions="FillAndExpand" />
+
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

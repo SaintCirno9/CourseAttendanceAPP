@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TeacherEnd.Views.AttendanceRecordInfoPage"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:TeacherEnd.ViewModels;assembly=TeacherEnd"
+             xmlns:behaviors="clr-namespace:AppShared.Behaviors;assembly=AppShared"
+             xmlns:controls="clr-namespace:AppShared.Controls;assembly=AppShared"
+             BackgroundColor="{DynamicResource Gray-Bg}"
+             NavigationPage.HasNavigationBar="False"
+             mc:Ignorable="d">
+
+    <ContentPage.BindingContext>
+        <viewModels:AttendanceRecordInfoPageViewModel x:Name="PageViewModel" />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+
+        <Grid
+            ColumnSpacing="0"
+            RowDefinitions="Auto, 1, *"
+            RowSpacing="0">
+
+            <StackLayout
+                x:Name="TitleView"
+                Grid.Row="0"
+                Padding="8,8"
+                BackgroundColor="{DynamicResource Gray-Bg}"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Horizontal"
+                Spacing="0">
+
+                <Button
+                    x:Name="BackToCourseList"
+                    Style="{StaticResource IconButtonStyle}"
+                    Text="{StaticResource Back}"
+                    Command="{Binding  BackCommand}" />
+
+                <StackLayout
+                    x:Name="TitleLayout"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="True"
+                    Orientation="Horizontal"
+                    Spacing="0"
+                    VerticalOptions="FillAndExpand">
+
+                    <!--  Course List page Title  -->
+                    <Label
+                        x:Name="TitleLabel"
+                        Margin="40,0,0,0"
+                        FontFamily="Montserrat-Medium"
+                        HorizontalOptions="FillAndExpand"
+                        Style="{StaticResource TitleLabelStyle}"
+                        Text="学生签到记录"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+
+                </StackLayout>
+
+                <StackLayout
+                    x:Name="Search"
+                    HorizontalOptions="EndAndExpand"
+                    IsVisible="False"
+                    Orientation="Horizontal"
+                    Spacing="0">
+
+                    <!--  Back to title layout  -->
+                    <Button
+                        x:Name="BackToTitle"
+                        Style="{StaticResource IconButtonStyle}"
+                        Text="{StaticResource Back}">
+                        <Button.Behaviors>
+                            <behaviors:SearchBarAnimationBehavior AnimationType="Shrink" />
+                        </Button.Behaviors>
+                    </Button>
+
+                    <!--  Rounded Search Entry  -->
+                    <border:SfBorder Style="{DynamicResource ThemeBorderStyle}">
+                        <controls:BorderlessEntry
+                            x:Name="SearchEntry"
+                            BindingContext="{x:Reference SearchableStudentInfoList}"
+                            HorizontalOptions="FillAndExpand"
+                            Placeholder="学号/姓名"
+                            Style="{StaticResource BorderlessEntryStyle}"
+                            Text="{Binding SearchText, Mode=TwoWay}" />
+                    </border:SfBorder>
+                </StackLayout>
+
+                <!--  Search Button  -->
+                <Button
+                    x:Name="SearchButton"
+                    IsVisible="True"
+                    Style="{StaticResource IconButtonStyle}"
+                    Text="{StaticResource Search}">
+                    <Button.Behaviors>
+                        <behaviors:SearchBarAnimationBehavior AnimationType="Expand" />
+                    </Button.Behaviors>
+                </Button>
+
+                <Button
+                    x:Name="GoToCourseDetail"
+                    Style="{StaticResource IconButtonStyle}"
+                    Text="{StaticResource  Edit}"
+                    Command="{Binding  GoToDetailCommand}" />
+            </StackLayout>
+            <BoxView Grid.Row="1" Style="{StaticResource HorizontalSeparatorStyle}" />
+
+            <controls:PullToRefreshContainer x:Name="PullToRefreshContainer" Grid.Row="2">
+
+                <controls:PullToRefreshContainer.PullableContent>
+                    <controls:SearchableStudentInfoList
+                        x:Name="SearchableStudentInfoList"
+                        AllowSwiping="True"
+                        AutoFitMode="Height"
+                        IsScrollBarVisible="False"
+                        ItemSpacing="0"
+                        ItemsSource="{Binding  AttendanceRecordList}"
+                        SearchText="{Binding SearchText}"
+                        SelectionBackgroundColor="{DynamicResource Gray-200}"
+                        SelectionGesture="Tap"
+                        SelectionMode="Single"
+                        TapCommand="{Binding ItemTappedCommand}"
+                        VerticalOptions="FillAndExpand">
+
+                        <controls:SearchableStudentInfoList.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid
+                                        ColumnDefinitions="*, 80"
+                                        ColumnSpacing="0"
+                                        RowDefinitions="72, 10"
+                                        RowSpacing="0">
+
+                                        <StackLayout
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            Margin="16,13"
+                                            Spacing="10">
+
+                                            <Label
+                                                FontFamily="Montserrat-Medium"
+                                                FontSize="16"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Student.Name}"
+                                                TextColor="{DynamicResource Gray-900}"
+                                                VerticalOptions="Center"
+                                                VerticalTextAlignment="Center" />
+
+
+                                            <Label
+                                                FontFamily="Montserrat-Medium"
+                                                FontSize="14"
+                                                Text="{Binding  StudentId}"
+                                                TextColor="{DynamicResource Gray-700}"
+                                                VerticalOptions="FillAndExpand"
+                                                VerticalTextAlignment="Center" />
+
+
+                                        </StackLayout>
+
+                                        <border:SfBorder
+                                            Grid.Column="1"
+                                            Margin="0,0,16,0"
+                                            BackgroundColor="{Binding ., Converter={StaticResource   AttendanceResultColorConverter}}"
+                                            BorderColor="Transparent"
+                                            CornerRadius="12"
+                                            HeightRequest="24"
+                                            VerticalOptions="Center">
+
+                                            <StackLayout
+                                                HorizontalOptions="Center"
+                                                Orientation="Horizontal"
+                                                Spacing="1"
+                                                VerticalOptions="Center">
+                                                <Label
+                                                    FontFamily="FontIcons"
+                                                    FontSize="12"
+                                                    Text="{StaticResource  New}"
+                                                    TextColor="{DynamicResource Gray-White}"
+                                                    VerticalOptions="Center"
+                                                    VerticalTextAlignment="Center" />
+
+                                                <Label
+                                                    FontFamily="Montserrat-Medium"
+                                                    FontSize="12"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding ., Converter={StaticResource   AttendanceResultConverter}}"
+                                                    TextColor="{DynamicResource Gray-White}"
+                                                    VerticalTextAlignment="Center" />
+
+                                            </StackLayout>
+                                        </border:SfBorder>
+                                        <BoxView
+                                            Grid.Row="1"
+                                            Grid.ColumnSpan="2"
+                                            Style="{StaticResource HorizontalSeparatorStyle}" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </controls:SearchableStudentInfoList.ItemTemplate>
+                    </controls:SearchableStudentInfoList>
+                </controls:PullToRefreshContainer.PullableContent>
+            </controls:PullToRefreshContainer>
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

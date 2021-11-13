@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="StudentEnd.Views.ExcusesListPage" xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:StudentEnd.ViewModels;assembly=StudentEnd"
+    xmlns:behaviors="clr-namespace:AppShared.Behaviors;assembly=AppShared"
+    xmlns:controls="clr-namespace:AppShared.Controls;assembly=AppShared"
+    xmlns:dataModels="clr-namespace:CommonShared.DataModels;assembly=CommonShared"
+    BackgroundColor="{DynamicResource Gray-Bg}"
+    mc:Ignorable="d">
+
+    <ContentPage.BindingContext>
+        <viewModels:ExcusesListPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+
+        <Grid
+            ColumnSpacing="0"
+            RowDefinitions="Auto, 1, *"
+            RowSpacing="0">
+
+            <StackLayout
+                x:Name="TitleView"
+                Grid.Row="0"
+                Padding="8,8"
+                BackgroundColor="{DynamicResource Gray-Bg}"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Horizontal"
+                Spacing="0">
+
+                <StackLayout
+                    x:Name="TitleLayout"
+                    HorizontalOptions="FillAndExpand"
+                    IsVisible="True"
+                    Orientation="Horizontal"
+                    Spacing="0"
+                    VerticalOptions="FillAndExpand">
+
+                    <!--  Course List page Title  -->
+                    <Label
+                        x:Name="TitleLabel"
+                        Margin="80,0,0,0"
+                        FontFamily="Montserrat-Medium"
+                        HorizontalOptions="FillAndExpand"
+                        Style="{StaticResource TitleLabelStyle}"
+                        Text="请假管理"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+
+                </StackLayout>
+
+                <StackLayout
+                    x:Name="Search"
+                    HorizontalOptions="EndAndExpand"
+                    IsVisible="False"
+                    Orientation="Horizontal"
+                    Spacing="0">
+
+                    <!--  Back to title layout  -->
+                    <Button
+                        x:Name="BackToTitle"
+                        Style="{StaticResource IconButtonStyle}"
+                        Text="{StaticResource Back}">
+                        <Button.Behaviors>
+                            <behaviors:SearchBarAnimationBehavior AnimationType="Shrink" />
+                        </Button.Behaviors>
+                    </Button>
+
+                    <!--  Rounded Search Entry  -->
+                    <border:SfBorder Style="{DynamicResource ThemeBorderStyle}">
+                        <controls:BorderlessEntry
+                            x:Name="SearchEntry"
+                            BindingContext="{x:Reference SearchableExcusesList}"
+                            HorizontalOptions="FillAndExpand"
+                            Placeholder="Search here"
+                            Style="{StaticResource BorderlessEntryStyle}"
+                            Text="{Binding SearchText, Mode=TwoWay}" />
+                    </border:SfBorder>
+                </StackLayout>
+
+                <!--  Search Button  -->
+                <Button
+                    x:Name="SearchButton"
+                    IsVisible="True"
+                    Style="{StaticResource IconButtonStyle}"
+                    Text="{StaticResource Search}">
+                    <Button.Behaviors>
+                        <behaviors:SearchBarAnimationBehavior AnimationType="Expand" />
+                    </Button.Behaviors>
+                </Button>
+
+                <!--  Add Button  -->
+                <Button
+                    x:Name="AddButton"
+                    Command="{Binding AddCommand}"
+                    HorizontalOptions="Fill"
+                    Style="{StaticResource  IconButtonStyle}"
+                    Text="{StaticResource Add}" />
+
+            </StackLayout>
+            <BoxView Grid.Row="1" Style="{StaticResource HorizontalSeparatorStyle}" />
+
+            <controls:PullToRefreshContainer x:Name="PullToRefreshContainer" Grid.Row="2">
+
+                <controls:PullToRefreshContainer.PullableContent>
+                    <controls:SearchableExcusesList
+                        x:Name="SearchableExcusesList"
+                        AllowSwiping="True"
+                        AutoFitMode="Height"
+                        IsScrollBarVisible="False"
+                        ItemSpacing="0"
+                        ItemsSource="{Binding ExcusesList}"
+                        SearchText="{Binding SearchText}"
+                        SelectionBackgroundColor="{DynamicResource Gray-200}"
+                        SelectionGesture="Tap"
+                        SelectionMode="Single"
+                        TapCommand="{Binding ItemTappedCommand}"
+                        VerticalOptions="FillAndExpand">
+
+                        <controls:SearchableExcusesList.ItemTemplate>
+                            <DataTemplate x:DataType="dataModels:Excuse">
+                                <ViewCell>
+                                    <Grid
+                                        ColumnDefinitions="*, 80"
+                                        ColumnSpacing="0"
+                                        RowDefinitions="72, 10"
+                                        RowSpacing="0">
+
+                                        <StackLayout
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            Margin="16,13"
+                                            Spacing="10">
+
+                                            <Label
+                                                FontFamily="Montserrat-Medium"
+                                                FontSize="16"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Course, Converter= {StaticResource CourseInfoConverter}}"
+                                                TextColor="{DynamicResource Gray-900}"
+                                                VerticalOptions="Center"
+                                                VerticalTextAlignment="Center" />
+
+
+                                            <Label
+                                                FontFamily="Montserrat-Medium"
+                                                FontSize="14"
+                                                Text="{Binding  Period}"
+                                                TextColor="{DynamicResource Gray-700}"
+                                                VerticalOptions="FillAndExpand"
+                                                VerticalTextAlignment="Center" />
+
+
+                                        </StackLayout>
+
+                                        <border:SfBorder
+                                            Grid.Column="1"
+                                            Margin="0,0,16,0"
+                                            BackgroundColor="{Binding ExcuseState, Converter={StaticResource  ExcuseStateToColorConverter}}"
+                                            BorderColor="Transparent"
+                                            CornerRadius="12"
+                                            HeightRequest="24"
+                                            VerticalOptions="Center">
+
+                                            <StackLayout
+                                                HorizontalOptions="Center"
+                                                Orientation="Horizontal"
+                                                Spacing="1"
+                                                VerticalOptions="Center">
+                                                <Label
+                                                    FontFamily="FontIcons"
+                                                    FontSize="12"
+                                                    Text="{StaticResource  New}"
+                                                    TextColor="{DynamicResource Gray-White}"
+                                                    VerticalOptions="Center"
+                                                    VerticalTextAlignment="Center" />
+
+                                                <Label
+                                                    FontFamily="Montserrat-Medium"
+                                                    FontSize="12"
+                                                    HorizontalOptions="Start"
+                                                    Text="{Binding ExcuseState, Converter={StaticResource ExcuseStateToStringConverter}}"
+                                                    TextColor="{DynamicResource Gray-White}"
+                                                    VerticalTextAlignment="Center" />
+
+                                            </StackLayout>
+                                        </border:SfBorder>
+                                        <BoxView
+                                            Grid.Row="1"
+                                            Grid.ColumnSpan="2"
+                                            Style="{StaticResource HorizontalSeparatorStyle}" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </controls:SearchableExcusesList.ItemTemplate>
+                    </controls:SearchableExcusesList>
+                </controls:PullToRefreshContainer.PullableContent>
+            </controls:PullToRefreshContainer>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

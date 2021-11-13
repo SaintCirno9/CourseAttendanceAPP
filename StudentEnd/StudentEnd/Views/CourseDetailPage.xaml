@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="StudentEnd.Views.CourseDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:viewModel="clr-namespace:StudentEnd.ViewModels"
+    xmlns:controls="clr-namespace:AppShared.Controls;assembly=AppShared"
+    BackgroundColor="{DynamicResource Gray-100}"
+    NavigationPage.HasNavigationBar="False" ControlTemplate="{StaticResource DetailPageTitleTemplate}">
+
+    <ContentPage.BindingContext>
+        <viewModel:CourseDetailPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+                Padding="16,24"
+                BackgroundColor="{DynamicResource Gray-100}"
+                Spacing="10">
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="课程名"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference CourseNameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="CourseNameEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                IsReadOnly="True"
+                                Placeholder="课程名"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding CourseName}" />
+
+                        </Grid>
+                    </border:SfBorder>
+                </StackLayout>
+
+                <!--  Course Number  -->
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="课程号"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference CourseNumberEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="CourseNumberEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                Placeholder="课程号"
+                                IsReadOnly="True"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding CourseNumber}" />
+
+                        </Grid>
+                    </border:SfBorder>
+                </StackLayout>
+
+
+                <!--  Course Serial  -->
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="课序号"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference CourseSerialEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="CourseSerialEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                Placeholder="课序号"
+                                IsReadOnly="True"
+                                Keyboard="Numeric"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding CourseSerial}" />
+
+                        </Grid>
+                    </border:SfBorder>
+                </StackLayout>
+
+                <!--  Course Duration  -->
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="课程时长"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference CourseDurationEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="CourseDurationEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                IsReadOnly="True"
+                                Placeholder="课程时长"
+                                Keyboard="Numeric"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding CourseDuration}" />
+
+                        </Grid>
+                    </border:SfBorder>
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="50">
+
+                    <!--  Select Button  -->
+                    <Button
+                        x:Name="SelectButton"
+                        Margin="0,24,0,0"
+                        Command="{Binding SelectCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="选择"
+                        WidthRequest="200"
+                        IsVisible="{Binding IsAttendedCourse, Converter={StaticResource InverseBoolConverter}}" />
+
+                    <!--  Exit Button  -->
+                    <Button
+                        x:Name="ExitButton"
+                        Margin="0,24,0,0"
+                        Command="{Binding ExitCommand}"
+                        Style="{StaticResource  PrimaryButtonStyle}"
+                        Text="退选"
+                        WidthRequest="200"
+                        IsVisible="{Binding IsAttendedCourse}" />
+
+                </StackLayout>
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

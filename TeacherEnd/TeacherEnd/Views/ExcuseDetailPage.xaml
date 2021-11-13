@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="TeacherEnd.Views.ExcuseDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:viewModels="clr-namespace:TeacherEnd.ViewModels;assembly=TeacherEnd"
+    xmlns:controls="clr-namespace:AppShared.Controls;assembly=AppShared"
+    NavigationPage.HasNavigationBar="False"
+    ControlTemplate="{StaticResource DetailPageTitleTemplate}">
+
+    <ContentPage.BindingContext>
+        <viewModels:ExcuseDetailPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+                Padding="16,24"
+                BackgroundColor="{DynamicResource Gray-100}"
+                Spacing="20">
+
+                <!--  Excuse Period  -->
+                <StackLayout>
+                    <Label
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="请假时段"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference ExcusePeriodEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="ExcusePeriodEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                IsReadOnly="True"
+                                Placeholder="请假时段"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding  ExcusePeriod}" />
+                        </Grid>
+                    </border:SfBorder>
+
+
+                </StackLayout>
+
+                <!--  Excuse Reason  -->
+                <StackLayout>
+                    <Label
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="请假原因"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference ExcuseReasonEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="ExcuseReasonEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                IsReadOnly="True"
+                                Placeholder="请假原因"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding  ExcuseReason}" />
+
+                        </Grid>
+                    </border:SfBorder>
+
+                </StackLayout>
+
+                <!--  Excuse Course  -->
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="请假课程"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference CourseNameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="CourseNameEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                IsReadOnly="True"
+                                Placeholder="请假课程"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding  ExcuseCourseName}" />
+
+
+                        </Grid>
+                    </border:SfBorder>
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="50">
+
+                    <!--  Reject Button  -->
+                    <Button
+                        x:Name="RejectButton"
+                        Margin="0,24,0,0"
+                        Command="{Binding RejectCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="驳回"
+                        WidthRequest="120"
+                        IsVisible="False" />
+
+                    <!--  Accept Button  -->
+                    <Button
+                        x:Name="AcceptButton"
+                        Margin="0,24,0,0"
+                        Command="{Binding AcceptCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="通过"
+                        WidthRequest="120"
+                        IsVisible="False" />
+
+                </StackLayout>
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

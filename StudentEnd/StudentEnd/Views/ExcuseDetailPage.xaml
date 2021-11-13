@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="StudentEnd.Views.ExcuseDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+    xmlns:viewModels="clr-namespace:StudentEnd.ViewModels;assembly=StudentEnd"
+    xmlns:behaviors="clr-namespace:AppShared.Behaviors;assembly=AppShared"
+    xmlns:controls="clr-namespace:AppShared.Controls;assembly=AppShared"
+    ControlTemplate="{StaticResource DetailPageTitleTemplate}">
+
+    <ContentPage.BindingContext>
+        <viewModels:ExcuseDetailPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+                Padding="16,24"
+                BackgroundColor="{DynamicResource Gray-100}"
+                Spacing="10">
+
+                <!--  Excuse Period  -->
+                <StackLayout>
+                    <Label
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="请假时段"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference CourseNameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="CourseNameEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                IsReadOnly="{Binding CanEdit, Converter={StaticResource InverseBoolConverter}}"
+                                Placeholder="请假时段"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding ExcusePeriod.Value}">
+                                <Entry.Behaviors>
+                                    <behaviors:EntryLineValidationBehaviour IsValid="{Binding ExcusePeriod.IsValid}" />
+                                </Entry.Behaviors>
+                            </controls:BorderlessEntry>
+
+                            <!--  Label to display error icon  -->
+                            <Label
+                                Grid.Column="1"
+                                Margin="12,0"
+                                IsVisible="{Binding Path=IsVisible, Source={x:Reference CourseNameValidationLabel}}"
+                                Style="{StaticResource ErrorIconLabelStyle}"
+                                Text="{StaticResource Error}" />
+                        </Grid>
+                    </border:SfBorder>
+
+                    <!--  Label to display error message  -->
+                    <Label
+                        x:Name="CourseNameValidationLabel"
+                        Margin="15,0,0,0"
+                        IsVisible="{Binding  ExcusePeriod.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                        Style="{StaticResource SimpleLabelStyle}"
+                        Text="{Binding ExcusePeriod.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        TextColor="{DynamicResource Red}"
+                        VerticalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <!--  Excuse Reason  -->
+                <StackLayout>
+                    <Label
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="请假原因"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference CourseNumberEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="CourseNumberEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                IsReadOnly="{Binding CanEdit, Converter={StaticResource InverseBoolConverter}}"
+                                Placeholder="请假原因"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding ExcuseReason.Value}">
+                                <Entry.Behaviors>
+                                    <behaviors:EntryLineValidationBehaviour IsValid="{Binding ExcuseReason.IsValid}" />
+                                </Entry.Behaviors>
+                            </controls:BorderlessEntry>
+
+                            <!--  Label to display error icon  -->
+                            <Label
+                                Grid.Column="1"
+                                Margin="12,0"
+                                IsVisible="{Binding Path=IsVisible, Source={x:Reference CourseNumberValidationLabel}}"
+                                Style="{StaticResource ErrorIconLabelStyle}"
+                                Text="{StaticResource Error}" />
+                        </Grid>
+                    </border:SfBorder>
+
+                    <!--  Label to display error message  -->
+                    <Label
+                        x:Name="CourseNumberValidationLabel"
+                        Margin="15,0,0,0"
+                        IsVisible="{Binding  ExcuseReason.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                        Style="{StaticResource SimpleLabelStyle}"
+                        Text="{Binding ExcuseReason.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        TextColor="{DynamicResource Red}"
+                        VerticalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <!--  Excuse Course  -->
+                <StackLayout>
+                    <Label
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="请假课程"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
+                        <Picker
+                            IsEnabled="{Binding CanEdit}"
+                            ItemsSource="{ Binding AttendedCourseNames}"
+                            SelectedItem="{Binding CourseName, Mode=TwoWay}"
+                            Style="{StaticResource TextInputLayoutPickerStyle}" />
+                    </inputLayout:SfTextInputLayout>
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="50">
+
+                    <!--  Delete Button  -->
+                    <Button
+                        x:Name="DeleteButton"
+                        Margin="0,24,0,0"
+                        Command="{Binding DeleteCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="删除"
+                        WidthRequest="120"
+                        IsVisible="{Binding CanDelete}" />
+
+                    <!--  Save Button  -->
+                    <Button
+                        Margin="0,24,0,0"
+                        Command="{Binding SaveCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="保存"
+                        WidthRequest="120"
+                        IsVisible="{Binding CanSave}" />
+
+                </StackLayout>
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

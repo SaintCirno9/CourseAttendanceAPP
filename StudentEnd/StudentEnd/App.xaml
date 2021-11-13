@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:themes="clr-namespace:AppShared.Themes;assembly=AppShared"
+             xmlns:converters="clr-namespace:AppShared.Converters;assembly=AppShared"
+             xmlns:controls="clr-namespace:AppShared.Controls;assembly=AppShared"
+             xmlns:templates="clr-namespace:AppShared.Templates;assembly=AppShared"
+             x:Class="StudentEnd.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <themes:LightTheme />
+                <templates:DetailPageTitleTemplate />
+                <converters:Converters />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <Style TargetType="controls:PullToRefreshContainer">
+                <Setter Property="ProgressBackgroundColor" Value="{StaticResource Gray-100}" />
+                <Setter Property="ProgressStrokeColor" Value="{ StaticResource  Primary}" />
+                <Setter Property="PullingThreshold" Value="130" />
+                <Setter Property="TransitionMode" Value="Push" />
+                <Setter Property="IsRefreshing" Value="False" />
+            </Style>
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>

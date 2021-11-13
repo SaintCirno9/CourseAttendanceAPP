@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                     x:Class="AppShared.Styles.PickerStyles">
+    <Style x:Key="TextInputLayoutPickerStyle" TargetType="Picker">
+        <Setter Property="FontFamily" Value="Montserrat-Regular" />
+        <Setter Property="TextColor" Value="{DynamicResource Gray-700}" />
+        <Setter Property="Margin" Value="8,3,0,-3" />
+        <Setter Property="HeightRequest" Value="40" />
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,108 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>default</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Baidu.AI" Version="3.6.14" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="5.0.1" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+        <PackageReference Include="Syncfusion.Xamarin.SfPullToRefresh" Version="19.1.0.57" />
+        <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+        <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+        <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="19.1.0.57" />
+        <PackageReference Include="Syncfusion.Xamarin.Core" Version="19.1.0.57" />
+        <PackageReference Include="Syncfusion.Xamarin.SfComboBox" Version="19.1.0.57" />
+        <PackageReference Include="Syncfusion.Xamarin.SfListView" Version="19.1.0.57" />
+        <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="19.1.0.57" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CommonShared\CommonShared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Styles\Colors.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\FontIcons.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\EntryStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\FrameStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\LabelStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\BorderStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\ButtonStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\EditorStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\RatingStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\BoxViewStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\CheckBoxStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\ComboBoxStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\ListViewStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\AvatarViewStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\RadioButtonStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\GradientViewStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\TextInputLayoutStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Styles\SegmentedControlStyles.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Themes\DarkTheme.xaml.cs">
+        <DependentUpon>DarkTheme.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Themes\LightTheme.xaml.cs">
+        <DependentUpon>LightTheme.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="Templates\DetailPageTitleTemplate.xaml.cs">
+        <DependentUpon>DetailPageTitleTemplate.xaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Themes\DarkTheme.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Themes\LightTheme.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </EmbeddedResource>
+    </ItemGroup>
+</Project>

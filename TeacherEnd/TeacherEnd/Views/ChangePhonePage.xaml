@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TeacherEnd.Views.ChangePhonePage"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:viewModel="clr-namespace:TeacherEnd.ViewModels"
+             xmlns:behaviors="clr-namespace:AppShared.Behaviors;assembly=AppShared"
+             xmlns:controls="clr-namespace:AppShared.Controls;assembly=AppShared"
+             BackgroundColor="{DynamicResource Gray-100}"
+             ControlTemplate="{StaticResource DetailPageTitleTemplate}">
+
+    <ContentPage.BindingContext>
+        <viewModel:ChangePhonePageViewModel />
+    </ContentPage.BindingContext>
+
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+                Padding="16,24"
+                BackgroundColor="{DynamicResource Gray-100}"
+                Spacing="10">
+
+                <!--  New Email  -->
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="新电话"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference OldPasswordEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="OldPasswordEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                Placeholder="新电话"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding NewPhone.Value}">
+                                <Entry.Behaviors>
+                                    <behaviors:EntryLineValidationBehaviour IsValid="{Binding NewPhone.IsValid}" />
+                                </Entry.Behaviors>
+                            </controls:BorderlessEntry>
+
+                            <!--  Label to display error icon  -->
+                            <Label
+                                Grid.Column="1"
+                                Margin="12,0"
+                                IsVisible="{Binding Path=IsVisible, Source={x:Reference CourseNameValidationLabel}}"
+                                Style="{StaticResource ErrorIconLabelStyle}"
+                                Text="{StaticResource Error}" />
+                        </Grid>
+                    </border:SfBorder>
+
+                    <!--  Label to display error message  -->
+                    <Label
+                        x:Name="CourseNameValidationLabel"
+                        Margin="15,0,0,0"
+                        IsVisible="{Binding NewPhone.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                        Style="{StaticResource SimpleLabelStyle}"
+                        Text="{Binding NewPhone.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        TextColor="{DynamicResource Red}"
+                        VerticalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <!--  VerifyCode  -->
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="短信验证码"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <StackLayout>
+                        <Grid ColumnDefinitions="70*, 30*">
+                            <border:SfBorder
+                                BorderColor="{Binding Source={x:Reference CourseSerialEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                                Style="{StaticResource DataFormBorderlessEntryBorderStyle}"
+                                HorizontalOptions="FillAndExpand">
+                                <Grid ColumnDefinitions="*, Auto">
+
+                                    <controls:BorderlessEntry
+                                        x:Name="CourseSerialEntry"
+                                        Margin="12,0"
+                                        HeightRequest="40"
+                                        Placeholder="验证码"
+                                        Keyboard="Numeric"
+                                        Style="{StaticResource BorderlessEntryStyle}"
+                                        Text="{Binding VerifyCode.Value}">
+                                        <Entry.Behaviors>
+                                            <behaviors:EntryLineValidationBehaviour
+                                                IsValid="{Binding VerifyCode.IsValid}" />
+                                        </Entry.Behaviors>
+                                    </controls:BorderlessEntry>
+
+                                    <!--  Label to display error icon  -->
+                                    <Label
+                                        Grid.Column="1"
+                                        Margin="12,0"
+                                        IsVisible="{Binding Path=IsVisible, Source={x:Reference CourseSerialValidationLabel}}"
+                                        Style="{StaticResource ErrorIconLabelStyle}"
+                                        Text="{StaticResource Error}" />
+
+                                </Grid>
+                            </border:SfBorder>
+                            <Button
+                                Grid.Column="1"
+                                x:Name="SendCodeButton"
+                                Command="{Binding SendCodeCommand}"
+                                HorizontalOptions="FillAndExpand"
+                                Style="{ StaticResource  PrimaryButtonStyle}"
+                                Text="{Binding SendCodeButtonText}">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button"
+                                                 Binding="{Binding SendCodeCommandCanExecute}" Value="False">
+                                        <Setter Property="Style" Value="{StaticResource  DisabledButtonStyle}" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button"
+                                                 Binding="{Binding SendCodeCommandCanExecute}" Value="True">
+                                        <Setter Property="Style" Value="{StaticResource PrimaryButtonStyle}" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Grid>
+
+
+                        <!--  Label to display error message  -->
+                        <Label
+                            x:Name="CourseSerialValidationLabel"
+                            Margin="15,0,0,0"
+                            IsVisible="{Binding VerifyCode.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                            Style="{StaticResource SimpleLabelStyle}"
+                            Text="{Binding VerifyCode.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                            TextColor="{DynamicResource Red}"
+                            VerticalOptions="FillAndExpand" />
+                    </StackLayout>
+
+
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="50">
+
+                    <!--  Reset Button  -->
+                    <Button
+                        x:Name="DeleteButton"
+                        Margin="0,24,0,0"
+                        Command="{Binding ResetCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="重置"
+                        WidthRequest="200"
+                        IsVisible="False" />
+
+                    <!--  Submit Button  -->
+                    <Button
+                        Margin="0,24,0,0"
+                        Command="{Binding SubmitCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="提交"
+                        WidthRequest="200" />
+
+                </StackLayout>
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

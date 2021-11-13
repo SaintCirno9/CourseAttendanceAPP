@@ -1,0 +1,492 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="StudentEnd.Views.ProfilePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:effectView="clr-namespace:Syncfusion.XForms.EffectsView;assembly=Syncfusion.Core.XForms"
+    xmlns:viewModels="clr-namespace:StudentEnd.ViewModels;assembly=StudentEnd"
+    xmlns:controls="clr-namespace:AppShared.Controls;assembly=AppShared"
+    BackgroundColor="{StaticResource Gray-Bg}">
+
+    <ContentPage.BindingContext>
+        <viewModels:ProfilePageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <Grid
+            ColumnSpacing="0"
+            RowDefinitions="Auto, 1, *"
+            RowSpacing="0">
+
+
+                <!--  Course List page Title  -->
+                <Label
+                    Grid.Row="0"
+                        x:Name="TitleLabel"
+                        Margin="0,17"
+                        FontFamily="Montserrat-Medium"
+                        HorizontalOptions="CenterAndExpand"
+                        BackgroundColor="{StaticResource Gray-Bg}"
+                        Style="{StaticResource TitleLabelStyle}"
+                        Text="个人信息"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+            <BoxView Grid.Row="1" Style="{StaticResource HorizontalSeparatorStyle}" />
+
+            <ScrollView Grid.Row="2">
+                <StackLayout BackgroundColor="{StaticResource Gray-100}" Spacing="0">
+
+                    <!--  Header label for account setting  -->
+                    <!--
+                    <Label
+                        Margin="16,24,0,16"
+                        FontFamily="Montserrat-SemiBold"
+                        FontSize="12"
+                        HorizontalOptions="FillAndExpand"
+                        LineHeight="{OnPlatform Default=-1,
+                                            Android=1.25}"
+                        Text="Account"
+                        TextColor="{StaticResource Gray-800}"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+                    -->
+
+                    <!--  Grid for Edit profile label and navigation bar icon  -->
+                    <controls:TapAnimationGrid
+                        BackgroundColor="{StaticResource Gray-Bg}"
+                        ColumnDefinitions="Auto, *, Auto"
+                        ColumnSpacing="0"
+                        Command="{Binding ViewProfileCommand}"
+                        RowSpacing="0"
+                        Tapped="False">
+
+                        <!--  Edit profile icon  -->
+                        <Label
+                            Grid.Column="0"
+                            Margin="16,0,0,0"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Account}" />
+                        <!--  Edit profile label  -->
+                        <Label
+                            Grid.Column="1"
+                            Margin="16,12"
+                            FontFamily="Montserrat-Medium"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource TitleLabelStyle}"
+                            Text="查看信息"
+                            VerticalOptions="Center" />
+                        <!--  Navigation icon  -->
+                        <Label
+                            Grid.Column="2"
+                            Margin="16,8"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Next}" />
+                    </controls:TapAnimationGrid>
+                    <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                    <!--  Grid for Change password label and navigation bar icon  -->
+                    <controls:TapAnimationGrid
+                        BackgroundColor="{StaticResource Gray-Bg}"
+                        ColumnDefinitions="Auto, *, Auto"
+                        ColumnSpacing="0"
+                        Command="{Binding ChangePasswordCommand}"
+                        RowSpacing="0"
+                        Tapped="False">
+
+                        <!--  Change password icon  -->
+                        <Label
+                            Grid.Column="0"
+                            Margin="16,0,0,0"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource  Edit}" />
+                        <!--  Change password label  -->
+                        <Label
+                            Grid.Column="1"
+                            Margin="16,12"
+                            FontFamily="Montserrat-Medium"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource TitleLabelStyle}"
+                            Text="修改密码"
+                            VerticalOptions="Center" />
+                        <!--  Navigation icon  -->
+                        <Label
+                            Grid.Column="2"
+                            Margin="16,8"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Next}" />
+                    </controls:TapAnimationGrid>
+                    <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                    <!--  Grid for Change Email label and navigation bar icon  -->
+                    <controls:TapAnimationGrid
+                        BackgroundColor="{StaticResource Gray-Bg}"
+                        ColumnDefinitions="Auto, *, Auto"
+                        ColumnSpacing="0"
+                        Command="{Binding ChangeEmailCommand}"
+                        RowSpacing="0"
+                        Tapped="False">
+
+                        <!--  Email icon  -->
+                        <Label
+                            Grid.Column="0"
+                            Margin="16,0,0,0"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Mail}" />
+                        <!--  Email label  -->
+                        <Label
+                            Grid.Column="1"
+                            Margin="16,12"
+                            FontFamily="Montserrat-Medium"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource TitleLabelStyle}"
+                            Text="修改邮箱"
+                            VerticalOptions="Center" />
+                        <!--  Navigation icon  -->
+                        <Label
+                            Grid.Column="2"
+                            Margin="16,8"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Next}" />
+                    </controls:TapAnimationGrid>
+
+                    <!--  Grid for Change Phone label and navigation bar icon  -->
+                    <controls:TapAnimationGrid
+                        BackgroundColor="{StaticResource Gray-Bg}"
+                        ColumnDefinitions="Auto, *, Auto"
+                        ColumnSpacing="0"
+                        Command="{Binding ChangePhoneCommand}"
+                        RowSpacing="0"
+                        Tapped="False">
+
+                        <!--  Phone icon  -->
+                        <Label
+                            Grid.Column="0"
+                            Margin="16,0,0,0"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Phone}" />
+                        <!--  Phone label  -->
+                        <Label
+                            Grid.Column="1"
+                            Margin="16,12"
+                            FontFamily="Montserrat-Medium"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource TitleLabelStyle}"
+                            Text="修改电话"
+                            VerticalOptions="Center" />
+                        <!--  Navigation icon  -->
+                        <Label
+                            Grid.Column="2"
+                            Margin="16,8"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Next}" />
+                    </controls:TapAnimationGrid>
+
+                    <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                    <!--~1~  Header lable for notifications  @1@
+                    <Label
+                        Margin="16,40,0,16"
+                        FontFamily="Montserrat-SemiBold"
+                        FontSize="12"
+                        HorizontalOptions="FillAndExpand"
+                        LineHeight="{OnPlatform Default=-1,
+                                            Android=1.25}"
+                        Text="NOTIFICATIONS"
+                        TextColor="{StaticResource Gray-800}"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+
+                    ~1~  Grid for Notifications label and switch  @1@
+                    <Grid
+                        BackgroundColor="{StaticResource Gray-Bg}"
+                        ColumnDefinitions="Auto, *, Auto"
+                        ColumnSpacing="0"
+                        RowSpacing="0">
+
+                        ~1~  Notifications icon  @1@
+                        <Label
+                            Grid.Column="0"
+                            Margin="16,0,0,0"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Notification}" />
+                        ~1~  Notification label  @1@
+                        <Label
+                            Grid.Column="1"
+                            Margin="16,12"
+                            FontFamily="Montserrat-Medium"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource TitleLabelStyle}"
+                            Text="Notifications"
+                            VerticalOptions="Center" />
+                        ~1~  Notifications switch  @1@
+                        <buttons:SfSwitch
+                            Grid.Column="2"
+                            Margin="8,0"
+                            AllowIndeterminateState="False"
+                            HeightRequest="28"
+                            VisualType="Cupertino">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="NotificationsCommonStates">
+                                    <VisualState x:Name="NotificationsOn">
+                                        <VisualState.Setters>
+                                            <Setter Property="SwitchSettings">
+                                                <Setter.Value>
+                                                    <buttons:CupertinoSwitchSettings
+                                                        x:TypeArguments="buttons:OnState"
+                                                        ThumbBorderColor="{StaticResource Gray-White}"
+                                                        ThumbColor="{StaticResource Gray-White}"
+                                                        TrackBorderColor="{StaticResource Gray-200}"
+                                                        TrackColor="{StaticResource PrimaryColor}" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="NotificationsOff">
+                                        <VisualState.Setters>
+                                            <Setter Property="SwitchSettings">
+                                                <Setter.Value>
+                                                    <buttons:CupertinoSwitchSettings
+                                                        x:TypeArguments="buttons:OffState"
+                                                        ThumbBorderColor="{StaticResource Gray-300}"
+                                                        ThumbColor="{StaticResource Gray-White}"
+                                                        TrackBorderColor="{StaticResource Gray-300}"
+                                                        TrackColor="{StaticResource Gray-300}" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </buttons:SfSwitch>
+                    </Grid>
+                    <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                    ~1~  Grid for Email notifications and switch  @1@
+                    <Grid
+                        BackgroundColor="{StaticResource Gray-Bg}"
+                        ColumnDefinitions="Auto, *, Auto"
+                        ColumnSpacing="0"
+                        RowSpacing="0">
+
+                        ~1~  Email notification icon  @1@
+                        <Label
+                            Grid.Column="0"
+                            Margin="16,0,0,0"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Account}" />
+                        ~1~  Email notification label  @1@
+                        <Label
+                            Grid.Column="1"
+                            Margin="16,12"
+                            FontFamily="Montserrat-Medium"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource TitleLabelStyle}"
+                            Text="Email Notifications"
+                            VerticalOptions="Center" />
+                        ~1~  Email notification switch  @1@
+                        <buttons:SfSwitch
+                            Grid.Column="2"
+                            Margin="8,0"
+                            AllowIndeterminateState="False"
+                            HeightRequest="28"
+                            VisualType="Cupertino">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="EmailCommonStates">
+                                    <VisualState x:Name="EmailOn">
+                                        <VisualState.Setters>
+                                            <Setter Property="SwitchSettings">
+                                                <Setter.Value>
+                                                    <buttons:CupertinoSwitchSettings
+                                                        x:TypeArguments="buttons:OnState"
+                                                        ThumbBorderColor="{StaticResource Gray-White}"
+                                                        ThumbColor="{StaticResource Gray-White}"
+                                                        TrackBorderColor="{StaticResource Gray-200}"
+                                                        TrackColor="{StaticResource PrimaryColor}" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="EmailOff">
+                                        <VisualState.Setters>
+                                            <Setter Property="SwitchSettings">
+                                                <Setter.Value>
+                                                    <buttons:CupertinoSwitchSettings
+                                                        x:TypeArguments="buttons:OffState"
+                                                        ThumbBorderColor="{StaticResource Gray-300}"
+                                                        ThumbColor="{StaticResource Gray-White}"
+                                                        TrackBorderColor="{StaticResource Gray-300}"
+                                                        TrackColor="{StaticResource Gray-300}" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </buttons:SfSwitch>
+                    </Grid>
+
+                    <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                    ~1~  Header label for Support setting  @1@
+                    <Label
+                        Margin="16,40,0,16"
+                        FontFamily="Montserrat-SemiBold"
+                        FontSize="12"
+                        HorizontalOptions="FillAndExpand"
+                        LineHeight="{OnPlatform Default=-1,
+                                            Android=1.25}"
+                        Text="SUPPORT"
+                        TextColor="{StaticResource Gray-800}"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+
+                    ~1~  Grid for Help label and navigation bar icon  @1@
+                    <controls:TapAnimationGrid
+                        BackgroundColor="{StaticResource Gray-Bg}"
+                        ColumnDefinitions="Auto, *, Auto"
+                        ColumnSpacing="0"
+                        Command="{Binding HelpCommand}"
+                        RowSpacing="0"
+                        Tapped="False">
+
+                        ~1~  help icon  @1@
+                        <Label
+                            Grid.Column="0"
+                            Margin="16,0,0,0"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Help}" />
+                        ~1~  Help text label  @1@
+                        <Label
+                            Grid.Column="1"
+                            Margin="16,12"
+                            FontFamily="Montserrat-Medium"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource TitleLabelStyle}"
+                            Text="Help"
+                            VerticalOptions="Center" />
+                        ~1~  Navigation icon  @1@
+                        <Label
+                            Grid.Column="2"
+                            Margin="16,8"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Next}" />
+                    </controls:TapAnimationGrid>
+                    <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                    ~1~  Grid for Terms of service label and navigation bar icon  @1@
+                    <controls:TapAnimationGrid
+                        BackgroundColor="{StaticResource Gray-Bg}"
+                        ColumnDefinitions="Auto, *, Auto"
+                        ColumnSpacing="0"
+                        Command="{Binding TermsCommand}"
+                        RowSpacing="0"
+                        Tapped="False">
+
+                        ~1~  Terms of service icon  @1@
+                        <Label
+                            Grid.Column="0"
+                            Margin="16,0,0,0"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Account}" />
+                        ~1~  Terms of service label  @1@
+                        <Label
+                            Grid.Column="1"
+                            Margin="16,12"
+                            FontFamily="Montserrat-Medium"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource TitleLabelStyle}"
+                            Text="Terms of Service"
+                            VerticalOptions="Center" />
+                        ~1~  Navigation icon  @1@
+                        <Label
+                            Grid.Column="2"
+                            Margin="16,8"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Next}" />
+                    </controls:TapAnimationGrid>
+                    <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                    ~1~  Grid for Privacy policy label and navigation bar icon  @1@
+                    <controls:TapAnimationGrid
+                        BackgroundColor="{StaticResource Gray-Bg}"
+                        ColumnDefinitions="Auto, *, Auto"
+                        ColumnSpacing="0"
+                        Command="{Binding PolicyCommand}"
+                        RowSpacing="0"
+                        Tapped="False">
+
+                        ~1~  Privacy policy icon  @1@
+                        <Label
+                            Grid.Column="0"
+                            Margin="16,0,0,0"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Account}" />
+                        ~1~  Privacy policy text label  @1@
+                        <Label
+                            Grid.Column="1"
+                            Margin="16,12"
+                            FontFamily="Montserrat-Medium"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource TitleLabelStyle}"
+                            Text="Privacy and Policy"
+                            VerticalOptions="Center" />
+                        ~1~  Navigation icon  @1@
+                        <Label
+                            Grid.Column="2"
+                            Margin="16,8"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Next}" />
+                    </controls:TapAnimationGrid>
+                    <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />
+
+                    ~1~  Grid for FAQs label and navigation bar icon  @1@
+                    <controls:TapAnimationGrid
+                        BackgroundColor="{StaticResource Gray-Bg}"
+                        ColumnDefinitions="Auto, *, Auto"
+                        ColumnSpacing="0"
+                        Command="{Binding FAQCommand}"
+                        RowSpacing="0"
+                        Tapped="False">
+
+                        ~1~  FAQs icon  @1@
+                        <Label
+                            Grid.Column="0"
+                            Margin="16,0,0,0"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Account}" />
+                        ~1~  FAQs text label  @1@
+                        <Label
+                            Grid.Column="1"
+                            Margin="16,12"
+                            FontFamily="Montserrat-Medium"
+                            HorizontalOptions="Start"
+                            Style="{StaticResource TitleLabelStyle}"
+                            Text="FAQs"
+                            VerticalOptions="Center" />
+                        ~1~  Navigation icon  @1@
+                        <Label
+                            Grid.Column="2"
+                            Margin="16,8"
+                            Style="{StaticResource IconLabelStyle}"
+                            Text="{StaticResource Next}" />
+                    </controls:TapAnimationGrid>
+
+                    <BoxView Style="{StaticResource HorizontalSeparatorStyle}" />-->
+
+                    <!--  Logout button  -->
+                    <Button
+                        Margin="0,24,0,32"
+                        Command="{Binding LogoutCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="注销"
+                        WidthRequest="245" />
+
+                </StackLayout>
+            </ScrollView>
+
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

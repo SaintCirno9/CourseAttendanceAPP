@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="AppShared.Converters.Converters"
+                    xmlns:converters="clr-namespace:AppShared.Converters;assembly=AppShared">
+
+    <converters:BooleanToColorConverter x:Key="ColorConverter" />
+    <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+    <converters:NameValidationConverter x:Key="FirstValidationErrorConverter" />
+    <converters:CourseInfoConverter x:Key="CourseInfoConverter" />
+    <converters:ExcuseStateToStringConverter x:Key="ExcuseStateToStringConverter" />
+    <converters:ExcuseStateToColorConverter x:Key="ExcuseStateToColorConverter" />
+    <converters:AttendanceTimeConverter x:Key="AttendanceTimeConverter" />
+    <converters:AttendanceLifeConverter x:Key="AttendanceLifeConverter" />
+    <converters:AttendanceLifeColorConverter x:Key="AttendanceLifeColorConverter" />
+    <converters:AttendanceResultConverter x:Key="AttendanceResultConverter" />
+    <converters:AttendanceResultColorConverter x:Key="AttendanceResultColorConverter" />
+    <converters:CourseStudentAttendanceConverter x:Key="CourseStudentAttendanceConverter" />
+    <converters:CourseStudentAttendanceColorConverter x:Key="CourseStudentAttendanceColorConverter" />
+</ResourceDictionary>

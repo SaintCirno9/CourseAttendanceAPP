@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage
+    x:Class="TeacherEnd.Views.CourseDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:viewModel="clr-namespace:TeacherEnd.ViewModels"
+    xmlns:behaviors="clr-namespace:AppShared.Behaviors;assembly=AppShared"
+    xmlns:controls="clr-namespace:AppShared.Controls;assembly=AppShared"
+    BackgroundColor="{DynamicResource Gray-100}"
+    ControlTemplate="{StaticResource DetailPageTitleTemplate}">
+
+    <ContentPage.BindingContext>
+        <viewModel:CourseDetailPageViewModel />
+    </ContentPage.BindingContext>
+
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+                Padding="16,24"
+                BackgroundColor="{DynamicResource Gray-100}"
+                Spacing="10">
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="课程名"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference CourseNameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="CourseNameEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                Placeholder="课程名"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding CourseName.Value}">
+                                <Entry.Behaviors>
+                                    <behaviors:EntryLineValidationBehaviour IsValid="{Binding CourseName.IsValid}" />
+                                </Entry.Behaviors>
+                            </controls:BorderlessEntry>
+
+                            <!--  Label to display error icon  -->
+                            <Label
+                                Grid.Column="1"
+                                Margin="12,0"
+                                IsVisible="{Binding Path=IsVisible, Source={x:Reference CourseNameValidationLabel}}"
+                                Style="{StaticResource ErrorIconLabelStyle}"
+                                Text="{StaticResource Error}" />
+                        </Grid>
+                    </border:SfBorder>
+
+                    <!--  Label to display error message  -->
+                    <Label
+                        x:Name="CourseNameValidationLabel"
+                        Margin="15,0,0,0"
+                        IsVisible="{Binding CourseName.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                        Style="{StaticResource SimpleLabelStyle}"
+                        Text="{Binding CourseName.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        TextColor="{DynamicResource Red}"
+                        VerticalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <!--  Course Number  -->
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="课程号"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference CourseNumberEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="CourseNumberEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                Placeholder="课程号"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding CourseNumber.Value}">
+                                <Entry.Behaviors>
+                                    <behaviors:EntryLineValidationBehaviour IsValid="{Binding CourseNumber.IsValid}" />
+                                </Entry.Behaviors>
+                            </controls:BorderlessEntry>
+
+                            <!--  Label to display error icon  -->
+                            <Label
+                                Grid.Column="1"
+                                Margin="12,0"
+                                IsVisible="{Binding Path=IsVisible, Source={x:Reference CourseNumberValidationLabel}}"
+                                Style="{StaticResource ErrorIconLabelStyle}"
+                                Text="{StaticResource Error}" />
+                        </Grid>
+                    </border:SfBorder>
+
+                    <!--  Label to display error message  -->
+                    <Label
+                        x:Name="CourseNumberValidationLabel"
+                        Margin="15,0,0,0"
+                        IsVisible="{Binding CourseNumber.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                        Style="{StaticResource SimpleLabelStyle}"
+                        Text="{Binding CourseNumber.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        TextColor="{DynamicResource Red}"
+                        VerticalOptions="FillAndExpand" />
+                </StackLayout>
+
+
+                <!--  Course Serial  -->
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="课序号"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference CourseSerialEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="CourseSerialEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                Placeholder="课序号"
+                                Keyboard="Numeric"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding CourseSerial.Value}">
+                                <Entry.Behaviors>
+                                    <behaviors:EntryLineValidationBehaviour IsValid="{Binding CourseSerial.IsValid}" />
+                                </Entry.Behaviors>
+                            </controls:BorderlessEntry>
+
+                            <!--  Label to display error icon  -->
+                            <Label
+                                Grid.Column="1"
+                                Margin="12,0"
+                                IsVisible="{Binding Path=IsVisible, Source={x:Reference CourseSerialValidationLabel}}"
+                                Style="{StaticResource ErrorIconLabelStyle}"
+                                Text="{StaticResource Error}" />
+                        </Grid>
+                    </border:SfBorder>
+
+                    <!--  Label to display error message  -->
+                    <Label
+                        x:Name="CourseSerialValidationLabel"
+                        Margin="15,0,0,0"
+                        IsVisible="{Binding CourseSerial.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                        Style="{StaticResource SimpleLabelStyle}"
+                        Text="{Binding CourseSerial.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        TextColor="{DynamicResource Red}"
+                        VerticalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <!--  Course Duration  -->
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="课程时长"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference CourseDurationEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="CourseDurationEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                Placeholder="课程时长"
+                                Keyboard="Numeric"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding CourseDuration.Value}">
+                                <Entry.Behaviors>
+                                    <behaviors:EntryLineValidationBehaviour IsValid="{Binding CourseDuration.IsValid}" />
+                                </Entry.Behaviors>
+                            </controls:BorderlessEntry>
+
+                            <!--  Label to display error icon  -->
+                            <Label
+                                Grid.Column="1"
+                                Margin="12,0"
+                                IsVisible="{Binding Path=IsVisible, Source={x:Reference CourseDurationValidationLabel}}"
+                                Style="{StaticResource ErrorIconLabelStyle}"
+                                Text="{StaticResource Error}" />
+                        </Grid>
+                    </border:SfBorder>
+
+                    <!--  Label to display error message  -->
+                    <Label
+                        x:Name="CourseDurationValidationLabel"
+                        Margin="15,0,0,0"
+                        IsVisible="{Binding CourseDuration.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                        Style="{StaticResource SimpleLabelStyle}"
+                        Text="{Binding CourseDuration.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        TextColor="{DynamicResource Red}"
+                        VerticalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="50">
+
+                    <!--  Delete Button  -->
+                    <Button
+                        x:Name="DeleteButton"
+                        HorizontalOptions="FillAndExpand"
+                        Margin="0,24,0,0"
+                        Command="{Binding DeleteCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="删除"
+                        IsVisible="{Binding IsModifying}" 
+                        WidthRequest="120" />
+
+                    <!--  Save Button  -->
+                    <Button
+                        Margin="0,24,0,0"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding SaveCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="保存"
+                        WidthRequest="120" />
+
+                </StackLayout>
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

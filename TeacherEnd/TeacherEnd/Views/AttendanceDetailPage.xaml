@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TeacherEnd.Views.AttendanceDetailPage"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:inputLayout="clr-namespace:Syncfusion.XForms.TextInputLayout;assembly=Syncfusion.Core.XForms"
+             xmlns:viewModels="clr-namespace:TeacherEnd.ViewModels;assembly=TeacherEnd"
+             xmlns:behaviors="clr-namespace:AppShared.Behaviors;assembly=AppShared"
+             xmlns:controls="clr-namespace:AppShared.Controls;assembly=AppShared"
+             NavigationPage.HasNavigationBar="False"
+             ControlTemplate="{StaticResource DetailPageTitleTemplate}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary />
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <viewModels:AttendanceDetailPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+                Padding="16,24"
+                BackgroundColor="{DynamicResource Gray-100}"
+                Spacing="10">
+
+                <!--  Duration  -->
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="持续时间"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference DurationEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="DurationEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                IsReadOnly="{Binding IsAdding,Converter={StaticResource InverseBoolConverter}}"
+                                Keyboard="Numeric"
+                                Placeholder="持续时间"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding Duration.Value}">
+                                <Entry.Behaviors>
+                                    <behaviors:EntryLineValidationBehaviour IsValid="{Binding Duration.IsValid}" />
+                                </Entry.Behaviors>
+                            </controls:BorderlessEntry>
+
+                            <!--  Label to display error icon  -->
+                            <Label
+                                Grid.Column="1"
+                                Margin="12,0"
+                                IsVisible="{Binding Path=IsVisible, Source={x:Reference CourseNameValidationLabel}}"
+                                Style="{StaticResource ErrorIconLabelStyle}"
+                                Text="{StaticResource Error}" />
+                        </Grid>
+                    </border:SfBorder>
+
+                    <!--  Label to display error message  -->
+                    <Label
+                        x:Name="CourseNameValidationLabel"
+                        Margin="15,0,0,0"
+                        IsVisible="{Binding  Duration.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                        Style="{StaticResource SimpleLabelStyle}"
+                        Text="{Binding Duration.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        TextColor="{DynamicResource Red}"
+                        VerticalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <!--  Max Duration  -->
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="有效时间"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference MaxDurationEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="MaxDurationEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                IsReadOnly="{Binding IsAdding,Converter={StaticResource InverseBoolConverter}}"
+                                Keyboard="Numeric"
+                                Placeholder="有效时间"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding MaxDuration.Value}">
+                                <Entry.Behaviors>
+                                    <behaviors:EntryLineValidationBehaviour IsValid="{Binding MaxDuration.IsValid}" />
+                                </Entry.Behaviors>
+                            </controls:BorderlessEntry>
+
+                            <!--  Label to display error icon  -->
+                            <Label
+                                Grid.Column="1"
+                                Margin="12,0"
+                                IsVisible="{Binding Path=IsVisible, Source={x:Reference CourseNumberValidationLabel}}"
+                                Style="{StaticResource ErrorIconLabelStyle}"
+                                Text="{StaticResource Error}" />
+                        </Grid>
+                    </border:SfBorder>
+
+                    <!--  Label to display error message  -->
+                    <Label
+                        x:Name="CourseNumberValidationLabel"
+                        Margin="15,0,0,0"
+                        IsVisible="{Binding MaxDuration.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                        Style="{StaticResource SimpleLabelStyle}"
+                        Text="{Binding  MaxDuration.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                        TextColor="{DynamicResource Red}"
+                        VerticalOptions="FillAndExpand" />
+                </StackLayout>
+
+                <!--  Attendance Course  -->
+                <StackLayout>
+                    <Label
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="签到课程"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
+                        <Picker
+                            IsEnabled="{Binding IsAdding}"
+                            ItemsSource="{ Binding CourseNames}"
+                            SelectedItem="{Binding CourseName, Mode=TwoWay}"
+                            Style="{StaticResource TextInputLayoutPickerStyle}" />
+                    </inputLayout:SfTextInputLayout>
+                </StackLayout>
+
+                <!--  Attendance Type  -->
+                <StackLayout>
+                    <Label
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="签到类型"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <inputLayout:SfTextInputLayout Style="{DynamicResource TextInputLayoutStyle}">
+                        <Picker
+                            IsEnabled="{Binding IsAdding}"
+                            ItemsSource="{ Binding AttendanceTypeStrings}"
+                            SelectedItem="{Binding AttendanceTypeString, Mode=TwoWay}"
+                            Style="{StaticResource TextInputLayoutPickerStyle}" />
+                    </inputLayout:SfTextInputLayout>
+                </StackLayout>
+
+                <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="50">
+
+                    <!--  Delete Button  -->
+                    <Button
+                        x:Name="DeleteButton"
+                        Margin="0,24,0,0"
+                        Command="{Binding DeleteCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="删除"
+                        WidthRequest="200"
+                        IsVisible="{ Binding IsAdding, Converter={StaticResource InverseBoolConverter}}" />
+
+                    <!--  Save Button  -->
+                    <Button
+                        x:Name="SaveButton"
+                        Margin="0,24,0,0"
+                        Command="{Binding SaveCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Text="保存"
+                        WidthRequest="200"
+                        IsVisible="{ Binding IsAdding}" />
+
+                </StackLayout>
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

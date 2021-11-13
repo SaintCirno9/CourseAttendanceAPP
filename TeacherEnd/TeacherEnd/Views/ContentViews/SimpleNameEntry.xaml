@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TeacherEnd.Views.ContentViews.SimpleNameEntry"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:behaviors="clr-namespace:AppShared.Behaviors;assembly=AppShared"
+             xmlns:converters="clr-namespace:AppShared.Converters;assembly=AppShared"
+             xmlns:controls="clr-namespace:AppShared.Controls;assembly=AppShared">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converters:NameValidationConverter x:Key="FirstValidationErrorConverter" />
+            <converters:BooleanToColorConverter x:Key="ColorConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout>
+            <!--  Entry to get Name from user  -->
+            <border:SfBorder
+                BackgroundColor="{DynamicResource Gray-Bg}"
+                BorderColor="{Binding Source={x:Reference NameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                Style="{StaticResource LoginFormBorderlessEntryBorderStyle}">
+                <Grid ColumnDefinitions="*, Auto">
+
+                    <controls:BorderlessEntry
+                        x:Name="NameEntry"
+                        Margin="15,0"
+                        HeightRequest="40"
+                        Placeholder="姓名"
+                        Style="{StaticResource BorderlessEntryStyle}"
+                        Text="{Binding Name.Value}">
+                        <Entry.Behaviors>
+                            <behaviors:EntryLineValidationBehaviour IsValid="{Binding Name.IsValid}" />
+                        </Entry.Behaviors>
+                    </controls:BorderlessEntry>
+
+                    <!--  Label to display error icon  -->
+                    <Label
+                        Grid.Column="1"
+                        IsVisible="{Binding Path=IsVisible, Source={x:Reference NameValidationLabel}}"
+                        Style="{StaticResource ErrorIconLabelStyle}"
+                        Text="{StaticResource Error}" />
+                </Grid>
+            </border:SfBorder>
+
+            <!--  Label to display error message  -->
+            <Label
+                x:Name="NameValidationLabel"
+                Margin="15,-3,0,0"
+                IsVisible="{Binding Name.IsValid, Converter={StaticResource InverseBoolConverter}}"
+                Style="{StaticResource SimpleLabelStyle}"
+                Text="{Binding Name.Errors, Converter={StaticResource FirstValidationErrorConverter}}"
+                TextColor="{DynamicResource Red}"
+                VerticalOptions="FillAndExpand" />
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+                    x:Class="AppShared.Templates.DetailPageTitleTemplate">
+    <ControlTemplate x:Key="DetailPageTitleTemplate">
+        <StackLayout BackgroundColor="{DynamicResource Gray-Bg}" Spacing="0">
+            <StackLayout Orientation="Horizontal">
+                <!--  Back to list button  -->
+                <Button
+                    x:Name="BackToList"
+                    Style="{ DynamicResource IconButtonStyle}"
+                    Text="{DynamicResource Back}"
+                    Command="{TemplateBinding BindingContext.BackCommand}" />
+
+                <!--  Title  -->
+                <Label
+                    Margin="0,16,52,16"
+                    FontFamily="Montserrat-Medium"
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{DynamicResource TitleLabelStyle}"
+                    Text="{TemplateBinding BindingContext.PageTitle}" />
+
+            </StackLayout>
+
+            <BoxView BackgroundColor="{DynamicResource Gray-200}" HeightRequest="1" />
+            <ContentPresenter />
+
+        </StackLayout>
+    </ControlTemplate>
+</ResourceDictionary>

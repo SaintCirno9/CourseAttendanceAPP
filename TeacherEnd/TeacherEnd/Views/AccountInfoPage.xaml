@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TeacherEnd.Views.AccountInfoPage"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:viewModels="clr-namespace:TeacherEnd.ViewModels;assembly=TeacherEnd"
+             xmlns:controls="clr-namespace:AppShared.Controls;assembly=AppShared"
+             NavigationPage.HasNavigationBar="False"
+             ControlTemplate="{StaticResource DetailPageTitleTemplate}">
+
+    <ContentPage.BindingContext>
+        <viewModels:AccountInfoPageViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+                Padding="16,24"
+                BackgroundColor="{DynamicResource Gray-100}"
+                Spacing="20">
+
+                <!--  Id  -->
+                <StackLayout>
+                    <Label
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="Id"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference IdEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="IdEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                IsReadOnly="True"
+                                Placeholder="工号"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding  Id}" />
+                        </Grid>
+                    </border:SfBorder>
+
+
+                </StackLayout>
+
+                <!--  Name  -->
+                <StackLayout>
+                    <Label
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="姓名"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference NameEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="NameEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                IsReadOnly="True"
+                                Placeholder="姓名"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding  Name}" />
+
+                        </Grid>
+                    </border:SfBorder>
+
+                </StackLayout>
+
+                <!--  Email  -->
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="邮箱"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference EmailEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="EmailEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                IsReadOnly="True"
+                                Placeholder="邮箱"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding  Email}" />
+                            
+                        </Grid>
+                    </border:SfBorder>
+                </StackLayout>
+
+                <!--  Phone  -->
+                <StackLayout>
+                    <Label
+
+                        FontFamily="Montserrat-Medium"
+                        FontSize="12"
+                        HeightRequest="18"
+                        Text="电话"
+                        TextColor="{DynamicResource Gray-800}" />
+
+                    <border:SfBorder
+                        BorderColor="{Binding Source={x:Reference PhoneEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        Style="{StaticResource DataFormBorderlessEntryBorderStyle}">
+                        <Grid ColumnDefinitions="*, Auto">
+
+                            <controls:BorderlessEntry
+                                x:Name="PhoneEntry"
+                                Margin="12,0"
+                                HeightRequest="40"
+                                IsReadOnly="True"
+                                Placeholder="电话"
+                                Style="{StaticResource BorderlessEntryStyle}"
+                                Text="{Binding  Phone}" />
+                            
+                        </Grid>
+                    </border:SfBorder>
+                </StackLayout>
+                
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
