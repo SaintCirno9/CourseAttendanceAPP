@@ -1,2 +1,7 @@
 # CourseAttendanceAPP
 An Course Attendance APP made by Xamarin.Forms/一个用Xamarin.Forms做的课程考勤APP
+
+AppShared文件夹包含教师端学生端共用的APP样式等内容
+CommonShared包含APP端和WebApi共用内容，例如数据类
+StudentEnd/TeacherEnd为学生端/教师端各自的内容，每个都为完整的Xamarin.Forms项目结构
+WebApi为后端，用到的技术有Jwt验证和.Net WebApi以及EntityFrameworkCore
